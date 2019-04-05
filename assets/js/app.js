@@ -61,14 +61,14 @@ function displayWaitlist() {
 
 }
 
-$('#add-btn').on('click', function (event) {
+$('#reserve-btn').on('click', function (event) {
     event.preventDefault();
 
     var newReservation = {
-        name: $('#name').val().trim(),
-        phoneNumber: $('#phone-num').val().trim(),
-        customerEmail: $('#email').val().trim(),
-        customerID: $('customer-id').val().trim()
+        name: $('#reserve-name').val().trim(),
+        phoneNumber: $('#reserve-phone').val().trim(),
+        customerEmail: $('#reserve-email').val().trim(),
+        customerID: $('reserve-unique-id').val().trim()
     };
 
     $.post('/api/reserve', newReservation)
