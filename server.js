@@ -9,6 +9,7 @@ var PORT = process.env.PORT || 8080;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('assets'));
 
 // Hot Restaurant Tables
 var tables = [];
@@ -19,15 +20,15 @@ var waitlist = [];
 // Routes
 
 app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname, '../../index.html'));
+    res.sendFile(path.join(__dirname, 'assets', 'html',  'index.html'));
 });
 
 app.get('/reserve', function(req, res) {
-    res.sendFile(path.join(__dirname, '../../reserve.html'));
+    res.sendFile(path.join(__dirname, 'assets', 'html', 'reserve.html'));
 }); 
 
 app.get('/tables', function(req, res) {
-    res.sendFile(path.join(__dirname, '../../tables.html'));
+    res.sendFile(path.join(__dirname, 'assets', 'html',  'tables.html'));
 });
 
 app.get('/api/tables', function(req, res) {
@@ -38,14 +39,15 @@ app.get('/api/waitlist', function(req, res) {
     return res.json(waitlist);
 });
 
-app.post('/api/reservation', function(req, res) {
+app.post('/api/reserve', function(req, res) {
 
     var newReservation = req.body;
 
-    console.log(newReservation.name);
+    console.log(newReservation);
 
     if (tables.length <= 5) {
         tables.push(newReservation);
+        console.log(tables);
     } else {
         waitlist.push(newReservation);
     }

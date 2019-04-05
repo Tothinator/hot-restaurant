@@ -1,4 +1,4 @@
-$("document").ready(function() {
+$(document).ready(function() {
     displayTables();
     displayWaitlist();
 });
@@ -64,11 +64,13 @@ function displayWaitlist() {
 $('#reserve-btn').on('click', function (event) {
     event.preventDefault();
 
+    console.log($('#reserve-name').val().trim());
+
     var newReservation = {
         name: $('#reserve-name').val().trim(),
         phoneNumber: $('#reserve-phone').val().trim(),
         customerEmail: $('#reserve-email').val().trim(),
-        customerID: $('reserve-unique-id').val().trim()
+        customerID: $('#reserve-unique-id').val().trim()
     };
 
     $.post('/api/reserve', newReservation)
